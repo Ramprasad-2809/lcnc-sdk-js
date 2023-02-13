@@ -3,11 +3,12 @@ import { Page } from "./page";
 import { LISTENER_CMDS } from "./constants";
 
 import { AppContext } from "./types/internal";
+import { appVariable } from "./types/external";
 
 export class Application extends BaseSDK {
 	page: Page;
 	_id: string;
-	variable: Object
+	variable: appVariable
 	constructor(props: AppContext) {
 		super({});
 		this._id = props.appId;
@@ -31,12 +32,19 @@ export class Application extends BaseSDK {
 			}
 		})
 	}
+
+	/**
+ 	@deprecated Use kf.app.variable.variable_id to get the value from a variable
+ 	*/
 	getVariable(key: string) {
 		return this._postMessageAsync(LISTENER_CMDS.GET_APP_VARIABLE, {
 			key
 		});
 	}
 
+	/**
+ 	@deprecated Use kf.app.variable.variable_id = "value" to set a value to a variable
+ 	*/
 	setVariable(key: string | object, value: any) {
 		return this._postMessageAsync(LISTENER_CMDS.SET_APP_VARIABLE, {
 			key,

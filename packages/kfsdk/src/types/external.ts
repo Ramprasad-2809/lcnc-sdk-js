@@ -13,3 +13,5 @@ export type accountObject = {
 export type environmentObject = {
 	isMobile: boolean
 }
+
+export type appVariable = {}
